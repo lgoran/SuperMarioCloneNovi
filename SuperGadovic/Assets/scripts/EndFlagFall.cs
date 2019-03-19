@@ -29,8 +29,8 @@ public class EndFlagFall : MonoBehaviour
     {
         if (isdroping == 1)
         {
-            flag.transform.position = Vector2.MoveTowards(flag.transform.position, bottomFlagPoint.transform.position, downSpeed * Time.fixedDeltaTime);
-            player.transform.position = Vector2.MoveTowards(player.transform.position, bottomFlagPoint.transform.position, downSpeed * Time.fixedDeltaTime);
+            flag.transform.position = Vector3.MoveTowards(flag.transform.position, bottomFlagPoint.transform.position, downSpeed * Time.fixedDeltaTime);
+            player.transform.position = Vector3.MoveTowards(player.transform.position, bottomFlagPoint.transform.position, downSpeed * Time.fixedDeltaTime);
             if (flag.transform.position == bottomFlagPoint.transform.position)
             {
                 Destroy(flagwall);
