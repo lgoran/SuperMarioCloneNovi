@@ -10,7 +10,7 @@ public class CoinCollect : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            CoinCounter.brojac++;
+            Mario.coins++;
             gameObject.GetComponent<AudioSource>().Play();
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;

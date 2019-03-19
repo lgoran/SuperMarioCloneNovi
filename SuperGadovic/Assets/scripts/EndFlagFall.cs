@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class EndFlagFall : MonoBehaviour
 {
@@ -27,9 +29,9 @@ public class EndFlagFall : MonoBehaviour
     {
         if (isdroping == 1)
         {
-            flag.transform.position = Vector2.MoveTowards(flag.transform.position, bottomFlagPoint.transform.position, downSpeed*Time.fixedDeltaTime);
-            player.transform.position = Vector2.MoveTowards(player.transform.position, bottomFlagPoint.transform.position, downSpeed*Time.fixedDeltaTime);
-            if(flag.transform.position==bottomFlagPoint.transform.position)
+            flag.transform.position = Vector2.MoveTowards(flag.transform.position, bottomFlagPoint.transform.position, downSpeed * Time.fixedDeltaTime);
+            player.transform.position = Vector2.MoveTowards(player.transform.position, bottomFlagPoint.transform.position, downSpeed * Time.fixedDeltaTime);
+            if (flag.transform.position == bottomFlagPoint.transform.position)
             {
                 Destroy(flagwall);
                 player.GetComponent<Rigidbody2D>().mass = 1;
@@ -38,18 +40,19 @@ public class EndFlagFall : MonoBehaviour
                 isdroping = 2;
             }
         }
-        if(isdroping==2)
+        if (isdroping == 2)
         {
             player.GetComponent<CharacterController2D>().Move(1f, false, false);
             StartCoroutine(FinishLevel());
-            
         }
     }
     IEnumerator FinishLevel()
     {
         yield return new WaitForSeconds(5f);
         player.GetComponent<PlayerMovement>().enabled = true;
-        //vrati se u MENU
-        Destroy(this);
+        if (Map_class.prijedeni_leveli[SceneManager.GetActiveScene().buildIndex-1] == false)
+            Map_class.PrijedenLevel(SceneManager.GetActiveScene().buildIndex);
+        Map_class.povratak_u_scenu = 1;
+        SceneManager.LoadScene(0);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FailJump : MonoBehaviour
 {
@@ -22,9 +23,11 @@ public class FailJump : MonoBehaviour
         yield return new WaitForSeconds(3f);
         controller.Move(0f, false, true);
         yield return new WaitForSeconds(2f);
-        player.transform.position = new Vector3(0, 0, 0);
+        //player.transform.position = new Vector3(0, 0, 0);
         player.GetComponent<PlayerMovement>().enabled = true;
-        LifeCount.lifeCount--;
+        Mario.health--;
         jumped = 0;
+        Map_class.povratak_u_scenu = 1;
+        SceneManager.LoadScene(0);
     }
 }
